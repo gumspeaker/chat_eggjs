@@ -32,6 +32,14 @@ module.exports = appInfo => {
     origin:'*',
     allowMethods:'GET,HEAD,PUT,POST,DELETE,PATCH'
   }
+  config.redis = {
+    client:{
+      port: 6379,
+      host: '47.115.47.66',
+      password: 'root',
+      db:0
+    }
+  }
   // 添加中间件
   config.middleware = ['errorHandler'];
   // 数据库配置信息

@@ -6,23 +6,22 @@ class UserController extends Controller {
   async sign() {
     const { ctx,service } = this;
     let userInfo = ctx.request.body;
-    // await console.log(ctx)
-    //  console.log(`${ctx.request.body}`);
     const signInformation = await ctx.service.user.addUser(userInfo);
-    // console.log(signInformation)
     ctx.body = signInformation
-    // return signInformation;
     }
     async login() {
       const { ctx,service } = this;
       let userInfo = ctx.request.body;
-      // await console.log(ctx)
-       console.log(`${ctx.request.body}`);
+      //  console.log(`${ctx.request.body}`);
       const loginInformation = await ctx.service.user.login(userInfo);
-      // console.log(signInformation)
+      if(loginInformation =="error"){
+        ctx.body = "参数错误"
+      }
+      else{
       const token = await ctx.service.actionToken.apply(loginInformation.user_name)
+      app.redis.set
       ctx.body = {loginInformation,token}
-      // return signInformation;
+      }
       }
 }
 
