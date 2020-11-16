@@ -29,7 +29,7 @@ module.exports = appInfo => {
   }
   // 设置跨域
   config.cors = {
-    origin:'*',
+    origin:'http://localhost:80',
     allowMethods:'GET,HEAD,PUT,POST,DELETE,PATCH'
   }
   config.redis = {

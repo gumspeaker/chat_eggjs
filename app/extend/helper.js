@@ -4,11 +4,24 @@ const moment = require('moment')
 exports.formatTime = time => moment(time).format('YYYY-MM-DD HH:mm:ss')
 
 // 处理成功响应
-exports.success = ({ ctx, res = null, msg = '请求成功' })=> {
-  ctx.body = {
+exports.success = function(res) {
+  // console.log(this)
+  this.ctx.body = {
     code: 0,
     data: res,
-    msg
+    msg:"请求成功"
   }
-  ctx.status = 200
+ this.ctx.status = 200
 }
+exports.writeToken =async function(user_name,token){
+  const {
+    ctx,
+    app,
+    service
+  } = this;
+ await app.redis.hset("users",user_name, token)
+//  app.redis.
+  // console.log(await app.redis.get(user_name))
+      
+}
+// export
