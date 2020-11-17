@@ -32,10 +32,16 @@ class UserService extends Service {
     const { username: user_name, password: user_password } = loginInfo
     if (checkParam(user_name, user_password) == true) {
       const user = await app.mysql.get("user", { user_name, user_password })
-      return user
+      return user 
     } else {
       return "error"
     }
+  }
+  async getUserInfoByName(username) {
+    // console.log(username)
+    const { app } = this.ctx
+    const user = await app.mysql.get("user", { user_name:username })
+    return user
   }
 }
 

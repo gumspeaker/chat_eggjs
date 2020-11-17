@@ -14,8 +14,8 @@ class UserController extends Controller {
     const { ctx, service, app, helper } = this
     let userInfo = ctx.request.body
     const loginInformation = await ctx.service.user.login(userInfo)
-    if (loginInformation == "error") {
-      ctx.body = "参数错误"
+    if (loginInformation == "error"||loginInformation == null) {
+      ctx.throw('500','参数错误或者密码错误')
     } else {
       const token = await service.actionToken.apply(loginInformation.user_name)
       ctx.helper.writeToken(loginInformation.user_name, token)
@@ -23,6 +23,22 @@ class UserController extends Controller {
       Reflect.deleteProperty(loginInformation, "user_password")
       ctx.helper.success({ loginInformation, token })
     }
+  }
+  async loginOut(){
+    const {ctx,service,app,} = this
+    let {username,token} = ctx.request.body
+    let res =await ctx.helper.deleteToken(username,token)
+    ctx.helper.success({res})
+  }
+  async updateInformation(){
+    const {ctx,service,app,} = this
+    const {token,username} = ctx.request.body
+    if( ctx.helper.checkToken(username,token)){
+      await ctx.helper.success('signInformation')     
+    }
+    else
+      ctx.throw('500','系统错误')
+  // ctx.body = ctx.request.body
   }
 }
 

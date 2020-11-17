@@ -3,14 +3,14 @@
 const Service = require("egg").Service
 
 class ActionTokenService extends Service {
-  async apply(_id) {
+  async apply(username) {
     const { ctx } = this
     return ctx.app.jwt.sign(
       {
         data: {
-          _id: _id,
+          user_name: username,
         },
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7,
+        expire: Math.floor(Date.now()) + 60 * 60 * 24 * 7*1000,
       },
       ctx.app.config.jwt.secret
     )
