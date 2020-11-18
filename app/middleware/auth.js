@@ -6,10 +6,11 @@ module.exports = (options) => {
     const token = ctx.request.body.token
     const method = ctx.method.toLowerCase()
     // 当前请求时get请求，执行接下来的中间件
-    if (method === "get") {
-      await next()
-      // 当前token值不存在的时候
-    } else if (!token) {
+    // if (method === "get") {
+    //   await next()
+    //   // 当前token值不存在的时候
+    // } else 
+    if (!token) {
       if (
         ctx.path === "/user/login" ||
         ctx.path === "/user/sign"

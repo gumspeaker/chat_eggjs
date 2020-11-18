@@ -18,6 +18,24 @@ class MessageService extends Service {
     const t = await app.mysql.insert("group_message", messageD)
     return t
   }
+  async getRecentMessage(groupId,page){
+    const { ctx, app, logger,config } = this
+    // console.log(config.pagesize)
+    const pagesize =config.pagesize
+    let begin = (parseInt(page)-1)*pagesize
+    // console.log(begin)
+    const res = await app.mysql.select('group_message',{
+      where : {
+        message_deleted:0,
+        message_groupId:parseInt(groupId)
+      },
+      columns:['message_id','message_body','message_date','message_owner','message_type'],
+      orders:[['message_date','desc']],
+      limit: pagesize,
+      offset:begin,
+    })
+    return res
+  }
 }
 
 module.exports = MessageService

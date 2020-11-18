@@ -14,6 +14,13 @@ class MessageController extends Controller {
     //   a:1
     // }
   }
+  async getMessageNew(){
+    const {app,ctx,service} = this
+    const {page,groupId} = ctx.request.queries
+    // console.log(Object.entries(ctx.request.body))
+    const res =await service.message.getRecentMessage(groupId,page)
+    ctx.helper.success(res)
+  }
 }
 
 module.exports = MessageController;

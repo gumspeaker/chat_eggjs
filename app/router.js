@@ -11,4 +11,5 @@ module.exports = (app) => {
   router.post("/user/loginout", controller.user.loginOut)
   router.post("/user/updateInformation", controller.user.updateInformation)
   router.post("/message/sendMessage",controller.message.sendMessage)
+  router.get("/message/getMessage",controller.message.getMessageNew)
 }
