@@ -36,6 +36,11 @@ class MessageService extends Service {
     })
     return res
   }
+  async addImageMessage(message){
+    const { ctx, app, logger } = this
+    const messageD = messageDto(message)
+    return await app.mysql.insert("group_message", messageD)   
+  }
 }
 
 module.exports = MessageService

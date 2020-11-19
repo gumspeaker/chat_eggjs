@@ -39,3 +39,7 @@ exports.checkToken =async function (username,token){
   ctx.throw('401','token不正确，请重新登录')
   return redisToken == token 
 }
+exports.saveFile =async function(file,filePath){
+
+  
+}

@@ -4,10 +4,10 @@ module.exports = appInfo => {
   const config = {};
 
   /**
-   * @member Config#
+   * @member Config#im
    * @property {String} KEY - description
    */
-  config.imagePath = "/image"
+  config.imagePath = '/image'
 
   return config;
 };

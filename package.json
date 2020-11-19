@@ -10,9 +10,10 @@
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-jwt": "^3.1.7",
+    "egg-multipart": "^2.10.3",
     "egg-mysql": "^3.0.0",
     "egg-redis": "^2.4.0",
-    "egg-scripts": "^2.11.0"
+    "egg-scripts": "^2.13.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
@@ -27,7 +28,7 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-chat",
+    "start": "egg-scripts start --port=8099 --daemon --title=egg-server-chat",
     "stop": "egg-scripts stop --title=egg-server-chat",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",

@@ -61,6 +61,9 @@ module.exports = (appInfo) => {
     //     return reg.test(ctx.get('user-agent'));
     // },
   }
+  config.multipart ={
+    mode:'file'
+  }
   const userConfig = {
     // myAppName: 'egg',
     pagesize: 10,
