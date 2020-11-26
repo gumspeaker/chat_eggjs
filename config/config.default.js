@@ -17,7 +17,7 @@ module.exports = (appInfo) => {
   config.security = {
     csrf: {
       enable: false,
-      domainWhiteList: ["http://localhost:7001"],
+      // domainWhiteList: ["localhost:7001","127.0.0.1:5500"],
       // headerName: 'x-csrf-token', // 通过 header 传递 CSRF token 的默认字段为 x-csrf-token
     },
   }
@@ -29,8 +29,9 @@ module.exports = (appInfo) => {
   }
   // 设置跨域
   config.cors = {
-    origin: "http://localhost:80",
-    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH",
+    origin: "http://127.0.0.1:5500",
+    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH", 
+    credentials: true,
   }
   config.redis = {
     client: {
@@ -48,7 +49,7 @@ module.exports = (appInfo) => {
   config.errorHandler = {
     // 通用配置（以下是重点）
     enable: true, // 控制中间件是否开启。
-    match: ["/user/*", "/message/*"], // 设置只有符合某些规则的请求才会经过这个中间件（匹配路由）
+    match: ["/user/*", "/message/*",'/'], // 设置只有符合某些规则的请求才会经过这个中间件（匹配路由）
     //ignore:'/shop' // 设置符合某些规则的请求不经过这个中间件。
     /**
         注意：

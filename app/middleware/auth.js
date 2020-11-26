@@ -13,7 +13,8 @@ module.exports = (options) => {
     if (!token) {
       if (
         ctx.path === "/user/login" ||
-        ctx.path === "/user/sign"
+        ctx.path === "/user/sign"  ||
+        ctx.path ==='/'
       ) {
         await next()
       } else {

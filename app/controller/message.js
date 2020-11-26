@@ -1,7 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-const fs = require('mz/fs');
+// const fs = require('mz/fs');
 class MessageController extends Controller {
   async sendMessage() {
     const {app,ctx,service } =this
@@ -23,7 +23,6 @@ class MessageController extends Controller {
     const message = ctx.request.body
     const file = ctx.request.files[0];
     const name = 'egg-multipart-test/' +path
-    let res
     try {
       result = await ctx.helper.saveFile(file,filePath)
     } catch (error) {

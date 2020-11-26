@@ -1,7 +1,9 @@
 module.exports = {
-  checkParam,
+  checkParam,deep
 }
 function checkParam(...payload) {
+  if(payload.length==[])
+  return false
   var nullFlag = payload.every((currentValue, index, arr) => {
     return currentValue != null
   })
@@ -12,18 +14,19 @@ function checkParam(...payload) {
 /**
  * @param {Object} obj
  */
-// function deep(obj){
-//     var newObj = Array.isArray(obj)?[]:{};
-//     if(typeof(obj)=="object"){
-//       for(let attr in obj){
-//         if(obj.hasOwnProperty(attr)){
-//           newObj[attr] = (typeof(obj)=="object"&&obj)?deep(obj[attr]):obj[attr]
-//         }
-//       }
-//     }
-//     else{
-//       return obj
-//     }
+function deep(obj){
+    var newObj = Array.isArray(obj)?[]:{};
+    if(typeof(obj)=="object"){
+      for(let attr in obj){
+        if(obj.hasOwnProperty(attr)){
+          newObj[attr] = (typeof(obj)=="object"&&obj)?deep(obj[attr]):obj[attr]
+        }
+      }
+    }
+    else{
+      return obj
+    }
 
-//   return newObj
-// }
+  return newObj
+}
+// console.log(module.exports.checkParam(1,3,4))
