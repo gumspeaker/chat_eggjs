@@ -8,7 +8,6 @@ class MessageController extends Controller {
     const message = ctx.request.body
     // ctx.helper.checkToken(message.messageOwner,message.token)
     const res =await service.message.addMessage(message)
-    console.log(Object.entries(res))
     ctx.helper.success(res)
   }
   async getMessageNew(){
@@ -21,13 +20,9 @@ class MessageController extends Controller {
   async sendImage(){
     const {app,ctx,service } =this
     const message = ctx.request.body
-    const file = ctx.request.files[0];
-    const name = 'egg-multipart-test/' +path
-    try {
-      result = await ctx.helper.saveFile(file,filePath)
-    } catch (error) {
-      
-    }
+    const file = ctx.request.files[0]
+    const filePath = '/image'+ file.filename
+    result = await ctx.helper.saveFile(file,filePath)
     // ctx.helper.checkToken(message.messageOwner,message.token)
     const res =await service.message.addImage(message)
     console.log(Object.entries(res))

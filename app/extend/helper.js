@@ -1,5 +1,5 @@
 const moment = require("moment")
-
+const fs = require("fs")
 // 格式化时间
 exports.formatTime = (time) => moment(time).format("YYYY-MM-DD HH:mm:ss")
 const users = "users"
@@ -40,6 +40,6 @@ exports.checkToken =async function (username,token){
   return redisToken == token 
 }
 exports.saveFile =async function(file,filePath){
-
+  fs.writeFile(filePath,file)
   
 }

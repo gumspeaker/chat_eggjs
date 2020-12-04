@@ -10,6 +10,10 @@ module.exports = (options) => {
     //   await next()
     //   // 当前token值不存在的时候
     // } else 
+          // const map =new Map();
+          // map.set({token_exist:false,},()=>{
+
+          // })
     if (!token) {
       if (
         ctx.path === "/user/login" ||
@@ -20,7 +24,8 @@ module.exports = (options) => {
       } else {
         ctx.throw("401", "未登录， 请先登录")
       }
-    } else {
+    } 
+    else {
       // 当前token值存在
       let decode
         // 验证当前token

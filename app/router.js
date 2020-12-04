@@ -12,5 +12,5 @@ module.exports = (app) => {
   router.post("/user/updateInformation", controller.user.updateInformation)
   router.post("/message/sendMessage",controller.message.sendMessage)
   router.get("/message/getMessage",controller.message.getMessageNew)
-  router.post("message/uploadImage",controller.message.sendMessage)
+  router.post("/message/uploadImage",controller.message.sendMessage)
 }
