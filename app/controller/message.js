@@ -21,11 +21,10 @@ class MessageController extends Controller {
     const {app,ctx,service } =this
     const message = ctx.request.body
     const file = ctx.request.files[0]
-    const filePath = '/image'+ file.filename
-    result = await ctx.helper.saveFile(file,filePath)
+
     // ctx.helper.checkToken(message.messageOwner,message.token)
-    const res =await service.message.addImage(message)
-    console.log(Object.entries(res))
+    const res = await service.message.addImageMessage(message)
+    // console.log(Object.entries(res))
     ctx.helper.success(res)
   }
 }

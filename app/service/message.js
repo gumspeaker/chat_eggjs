@@ -38,6 +38,8 @@ class MessageService extends Service {
   }
   async addImageMessage(message){
     const { ctx, app, logger } = this
+    const filePath = '/image'+ file.filename
+    result = await ctx.helper.saveFile(file,filePath)
     const messageD = messageDto(message)
     return await app.mysql.insert("group_message", messageD)   
   }
