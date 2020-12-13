@@ -13,32 +13,39 @@ function messageDto(message) {
 }
 class MessageService extends Service {
   async addMessage(message) {
-    const { ctx, app, logger } = this
-    const messageD = messageDto(message)
-    const t = await app.mysql.insert("group_message", messageD)
-    return t
+    try {
+      const { ctx, app, logger } = this
+      const messageD = messageDto(message)
+      const t = await app.mysql.insert("group_message", messageD)
+      return t
+    } catch (error) {
+    }
+
   }
   async getRecentMessage(groupId,page){
-    const { ctx, app, logger,config } = this
-    // console.log(config.pagesize)
-    const pagesize =config.pagesize
-    let begin = (parseInt(page)-1)*pagesize
-    // console.log(begin)
-    const res = await app.mysql.select('group_message',{
-      where : {
-        message_deleted:0,
-        message_groupId:parseInt(groupId)
-      },
-      columns:['message_id','message_body','message_date','message_owner','message_type'],
-      orders:[['message_date','desc']],
-      limit: pagesize,
-      offset:begin,
-    })
-    return res
+    try {
+      const { ctx, app, logger,config } = this
+      // console.log(config.pagesize)
+      const pagesize =config.pagesize
+      let begin = (parseInt(page)-1)*pagesize
+      // console.log(begin)
+      const res = await app.mysql.select('group_message',{
+        where : {
+          message_deleted:0,
+          message_groupId:parseInt(groupId)
+        },
+        columns:['message_id','message_body','message_date','message_owner','message_type'],
+        orders:[['message_date','desc']],
+        limit: pagesize,
+        offset:begin,
+      })
+      return res
+    } catch (error) {
+    }
   }
-  async addImageMessage(message){
+  async addImageMessage(message,file){
     const { ctx, app, logger } = this
-    const filePath = '/image'+ file.filename
+    const filePath = './image/'+ file.filename
     result = await ctx.helper.saveFile(file,filePath)
     const messageD = messageDto(message)
     return await app.mysql.insert("group_message", messageD)   

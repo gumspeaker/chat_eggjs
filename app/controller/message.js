@@ -14,16 +14,16 @@ class MessageController extends Controller {
     const {app,ctx,service} = this
     const {page,groupId} = ctx.request.queries
     const res =await service.message.getRecentMessage(groupId,page)
-    console.log(app.config.imagePath)
+
     ctx.helper.success(res)
   }
   async sendImage(){
     const {app,ctx,service } =this
-    const message = ctx.request.body
+    const message = {...ctx.request.body,messageBody:null}
     const file = ctx.request.files[0]
 
     // ctx.helper.checkToken(message.messageOwner,message.token)
-    const res = await service.message.addImageMessage(message)
+    const res = await service.message.addImageMessage(message,file)
     // console.log(Object.entries(res))
     ctx.helper.success(res)
   }

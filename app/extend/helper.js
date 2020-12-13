@@ -40,6 +40,13 @@ exports.checkToken =async function (username,token){
   return redisToken == token 
 }
 exports.saveFile =async function(file,filePath){
-  fs.writeFile(filePath,file)
+  let myFile = ""
+  await fs.readFile(file.filepath,(err,data)=>{
+     myFile = data;
+   })
+  await fs.writeFile(filePath,myFile,(err,data)=>{
+
+    console.log(err)
+  })
   
 }
