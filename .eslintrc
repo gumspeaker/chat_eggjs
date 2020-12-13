@@ -1,5 +1,5 @@
 {
-  // "extends": "eslint-config-egg",
-  "no-unused-expressions": false,
-  "semi": [2, "always"]
+  "extends": "eslint-config-egg"
+  // "no-unused-expressions": false,
+  // "semi": [2, "always"]
 }
