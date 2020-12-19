@@ -1,5 +1,6 @@
 "use strict"
 const Service = require("egg").Service
+const uuid = require("uuid")
 function messageDto(message) {
   return {
     message_id: null,
@@ -45,10 +46,20 @@ class MessageService extends Service {
   }
   async addImageMessage(message,file){
     const { ctx, app, logger } = this
-    const filePath = './image/'+ file.filename
-    result = await ctx.helper.saveFile(file,filePath)
+    const fileType  = file.filename.split(".")[file.filename.split(".").length-1]
+    const savedFileName =uuid.v4()+"."+fileType
+    const filePath = './image/'+ savedFileName
+    const result = await ctx.helper.saveFile(file,filePath)
     const messageD = messageDto(message)
-    return await app.mysql.insert("group_message", messageD)   
+    if(result){
+      messageD.message_body = savedFileName
+     await app.mysql.insert("group_message", messageD)   
+    }
+    else{
+      messageD.message_body = "err.img"
+      await app.mysql.insert("group_message", messageD)  
+    }
+   return await  messageD
   }
 }
 

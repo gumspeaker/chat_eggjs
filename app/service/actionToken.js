@@ -18,3 +18,4 @@ class ActionTokenService extends Service {
 }
 
 module.exports = ActionTokenService
+

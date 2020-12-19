@@ -13,7 +13,8 @@
     "egg-multipart": "^2.10.3",
     "egg-mysql": "^3.0.0",
     "egg-redis": "^2.4.0",
-    "egg-scripts": "^2.13.0"
+    "egg-scripts": "^2.13.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "autod": "^3.0.1",
