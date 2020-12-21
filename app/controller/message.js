@@ -6,7 +6,6 @@ class MessageController extends Controller {
   async sendMessage() {
     const {app,ctx,service } =this
     const message = ctx.request.body
-    // ctx.helper.checkToken(message.messageOwner,message.token)
     const res =await service.message.addMessage(message)
     ctx.helper.success(res)
   }
@@ -21,12 +20,10 @@ class MessageController extends Controller {
     const {app,ctx,service } =this
     const message = {...ctx.request.body,messageBody:null}
     const file = ctx.request.files[0]
-
-    // ctx.helper.checkToken(message.messageOwner,message.token)
-    const res = await service.message.addImageMessage(message,file)
-    // console.log(Object.entries(res))
+    const res = await service.message.uploadFile(message,file)
     ctx.helper.success(res)
   }
+
 }
 
 module.exports = MessageController;

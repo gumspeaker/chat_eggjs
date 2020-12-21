@@ -16,6 +16,23 @@ exports.success = function (res) {
   }
   this.ctx.status = 200
 }
+exports.parseMsg = function (action, payload = {}, metadata = {}) {
+  const meta = Object.assign(
+    {},
+    {
+      timestamp: Date.now(),
+    },
+    metadata
+  )
+
+  return {
+    meta,
+    data: {
+      action,
+      payload,
+    },
+  }
+}
 exports.writeToken = async function (user_name, token) {
   const { ctx, app, service } = this
   await app.redis.hset(users, user_name, token)
@@ -41,15 +58,9 @@ exports.saveFile = async function (file, toFilePath) {
   let res = false
   const promiseRead = util.promisify(fs.readFile)
   const promiseWrite = util.promisify(fs.writeFile)
-  // return await promiseRead(file.filepath)
-  //   .then((data) => promiseWrite(toFilePath, data))
-  //   .then((r) => true)
-  //   .catch((err) => {
-  //     return res
-  //   })
   try {
-    const data= await promiseRead(file.filepath)
-    await promiseWrite(toFilePath,data)
+    const data = await promiseRead(file.filepath)
+    await promiseWrite(toFilePath, data)
     res = true
   } catch (error) {
     res = false

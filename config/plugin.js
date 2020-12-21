@@ -6,6 +6,7 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
+
   mysql: {
     enable: true,
     package: 'egg-mysql',
@@ -25,5 +26,9 @@ module.exports = {
   multipart:{
     enable:true,
     package:'egg-multipart'
+  },
+  io:{
+    enable:true,
+    package:'egg-socket.io'
   }
 };

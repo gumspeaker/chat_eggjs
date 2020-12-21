@@ -2,6 +2,32 @@
 
 "use strict"
 const { db_config } = require("../database/config")
+const whitelist = [
+  // images
+  '.jpg', '.jpeg', // image/jpeg
+  '.png', // image/png, image/x-png
+  '.gif', // image/gif
+  '.bmp', // image/bmp
+  '.wbmp', // image/vnd.wap.wbmp
+  '.webp',
+  '.tif',
+  '.psd',
+  // text
+  '.svg',
+  '.js', '.jsx',
+  '.json',
+  '.css', '.less',
+  '.html', '.htm',
+  '.xml',
+  // tar
+  '.zip',
+  '.gz', '.tgz', '.gzip',
+  // video
+  '.mp3',
+  '.mp4',
+  '.avi',
+  '.pdf'
+];
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -62,8 +88,31 @@ module.exports = (appInfo) => {
     //     return reg.test(ctx.get('user-agent'));
     // },
   }
+  config.io = { 
+    // redis: {
+    //   port: 6379,
+    //   host: "47.115.47.66",
+    //   password: "root",
+    //   db: 0,
+    // },
+    namespace: {
+      '/': {
+        connectionMiddleware: ['connection'],
+        packetMiddleware: ['filter'],
+      },
+      '/socket.io': {
+        connectionMiddleware: ['connection'],
+        packetMiddleware: ['filter'],
+      },
+      '/chat': {
+        connectionMiddleware: ['connection'],
+        packetMiddleware: [],
+      }
+    }
+  }
   config.multipart ={
-    mode:'file'
+    mode:'file',
+    whitelist:whitelist
   }
   const userConfig = {
     // myAppName: 'egg',
